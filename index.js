@@ -45,4 +45,23 @@ const flat = (object, depth) => {
       .map(r => [key].concat(r))).flat()
 }
 
-module.exports = { visit, get, getorset, set, assign, del, flat }
+const build = (items) => {
+  const res = {}
+  for (let item of items) {
+    const path = item.slice()
+    const value = path.splice(-1)
+    set(res, path, value[0])
+  }
+  return res
+}
+
+module.exports = {
+  visit,
+  get,
+  getorset,
+  set,
+  assign,
+  del,
+  flat,
+  build
+}
