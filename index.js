@@ -37,4 +37,12 @@ const del = (object, path) =>
     return res
   })
 
-module.exports = { visit, get, getorset, set, assign, del }
+const flat = (object, depth) => {
+  if (depth == 0) return [object]
+  return Object.keys(object)
+    .filter(key => object[key] != null)
+    .map(key => flat(object[key], depth - 1)
+      .map(r => [key].concat(r))).flat()
+}
+
+module.exports = { visit, get, getorset, set, assign, del, flat }
