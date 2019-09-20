@@ -1,6 +1,6 @@
 {
   "name": "pathie",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Object path helpers",
   "main": "index.js",
   "repository": {
