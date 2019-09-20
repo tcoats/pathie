@@ -38,11 +38,14 @@ const del = (object, path) =>
   })
 
 const flat = (object, depth) => {
-  if (depth == 0) return [object]
-  return Object.keys(object)
-    .filter(key => object[key] != null)
-    .map(key => flat(object[key], depth - 1)
-      .map(r => [key].concat(r))).flat()
+  if (depth == 0) return [[object]]
+  const result = []
+  for (const key of Object.keys(object)) {
+    if (object[key] == null) continue
+    for (const row of flat(object[key], depth - 1))
+      result.push([ key, ...row ])
+  }
+  return result
 }
 
 const build = (items) => {
